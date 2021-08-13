@@ -9,8 +9,8 @@ public class MapGenerator : MonoBehaviour
     public int width;
     public int height;
 
-    public string seed;
-    public bool useRandomSeed;
+    string seed;
+    //public bool useRandomSeed;
 
     [Range(0, 100)]
     public int randomFillPercent;
@@ -19,6 +19,7 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
+        GenerateMap();
         GenerateMap();
     }
 
@@ -66,10 +67,11 @@ public class MapGenerator : MonoBehaviour
 
     void RandomFillMap()
     {
-        if (useRandomSeed)
-        {
-            seed = Time.time.ToString();
-        }
+        //if (useRandomSeed)
+        //{
+        //    seed = Time.time.ToString();
+        //}
+        seed = System.DateTime.Now.ToString();
 
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
@@ -78,7 +80,7 @@ public class MapGenerator : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
-                {
+                { 
                     map[x, y] = 1;
                 }
                 else
