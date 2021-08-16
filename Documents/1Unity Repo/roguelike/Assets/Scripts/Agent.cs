@@ -42,7 +42,7 @@ public class Agent : MonoBehaviour
     {
         if (Vector3.Distance(playerTransform.position, transform.position) <= 30.0f)
         {
-            curState = Awake;
+            curState = FSMState.Awake;
         }
     }
 
@@ -50,7 +50,7 @@ public class Agent : MonoBehaviour
     {
         if (Vector3.Distance(playerTransform.position, transform.position) >= 30.0f)
         {
-            curState = Asleep;
+            curState = FSMState.Asleep;
         }
 
     }
