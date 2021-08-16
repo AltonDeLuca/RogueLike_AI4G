@@ -7,10 +7,13 @@ public class Player : MonoBehaviour
 {
     Rigidbody rigidbody;
     Vector3 velocity;
+    public GameObject startPos;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.position = startPos.transform.position;
+        
     }
 
     // Update is called once per frame

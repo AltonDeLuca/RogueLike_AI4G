@@ -5,9 +5,11 @@ using System;
 
 public class MapGenerator : MonoBehaviour
 {
-
     public int width;
     public int height;
+    public GameObject startPos;
+    public GameObject enemyPos;
+    public GameObject enemy;
 
     string seed;
     //public bool useRandomSeed;
@@ -20,15 +22,36 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         GenerateMap();
-        GenerateMap();
+        for (int x = 0; x < map.Length; x++)
+        {
+            for (int y = 0; y < map.Length; y++)
+            {
+                if (map[x,y] == 0)
+                {
+                    startPos.transform.position = new Vector3(x, -3, y);
+                    break;
+                }
+            }
+        }
+        for (int x = map.Length; x > 0; x--)
+        {
+            for (int y = map.Length; y > 0; y--)
+            {
+                if (map[x, y] == 0)
+                {
+                    enemyPos.transform.position = new Vector3(x, -3, y);
+                    break;
+                }
+            }
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            GenerateMap();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GenerateMap();
+        //}
     }
 
     void GenerateMap()
@@ -62,6 +85,7 @@ public class MapGenerator : MonoBehaviour
 
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
+        
     }
 
 
@@ -78,7 +102,7 @@ public class MapGenerator : MonoBehaviour
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
-            {
+            { 
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
                 { 
                     map[x, y] = 1;
@@ -230,6 +254,10 @@ public class MapGenerator : MonoBehaviour
         survivingRooms.Sort();
         survivingRooms[0].isMainRoom = true;
         survivingRooms[0].isAccessibleFromMainRoom = true;
+
+
+        
+
 
         ConnectClosestRooms(survivingRooms);
 
@@ -432,9 +460,10 @@ public class MapGenerator : MonoBehaviour
     {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
+    
 
 
-    struct Coord {
+    public struct Coord {
         public int tileX;
         public int tileY;
 
