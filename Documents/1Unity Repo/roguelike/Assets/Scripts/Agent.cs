@@ -48,7 +48,7 @@ public class Agent : MonoBehaviour
         shootRate = 1.0f;
         health = 100;
 
-        pointList = GameObject.FindGameObjectsWithTag("wp");
+        //pointList = GameObject.FindGameObjectsWithTag("wp");
 
         FindNextPoint();
 
